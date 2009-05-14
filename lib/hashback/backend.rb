@@ -8,47 +8,43 @@ module HashBack
     def initialize(namespace, moneta_klass, options = { })
       @namespace = namespace
       @options   = options
-      @cache     = initialize_cache_klass(moneta_klass)
+      @moneta     = initialize_moneta_klass(moneta_klass)
     end
     
     def [](key)
-      @cache[key_name_for(key)]
+      @moneta[key_name_for(key)]
     end
     
     def []=(key, value)
-      @cache[key_name_for(key)] = value
+      @moneta[key_name_for(key)] = value
     end
 
     def delete(key)
-      @cache.delete(key_name_for(key))
+      @moneta.delete(key_name_for(key))
     end
 
     private
 
-    def initialize_cache_klass(cache_klass)
-      require_moneta_library_for(cache_klass)
-      load_moneta_klass(klass_const)
+    def initialize_moneta_klass(klass)
+      require_moneta_library_for(klass)
+      load_moneta_klass(klass)
     end
     
+    def require_moneta_library_for(klass)
+      require_klass(klass.to_s.gsub(/::/, '/').downcase)
+    end
+
     def load_moneta_klass(klass)
       klass_const = klass.respond_to?(:constantize) ? klass.constantize : klass      
       klass_const.new(@options)
     end
     
-    def require_moneta_library_for(cache_klass)
-      require_klass(cache_klass.to_s.gsub(/::/, '/').downcase)
-    end
-
     def require_klass(klass)
       require klass
     end
 
     def key_name_for(key)
       [ @namespace, key ].join('-')
-    end
-    
-    def table_name_from(archived_attribute)
-      archived_attribute.instance.class.table_name
     end
   end
 end
