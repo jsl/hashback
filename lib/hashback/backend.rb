@@ -27,7 +27,11 @@ module HashBack
 
     def initialize_cache_klass(cache_klass)
       require_moneta_library_for(cache_klass)
-      klass_const = cache_klass.respond_to?(:constantize) ? cache_klass.constantize : cache_klass      
+      load_moneta_klass(klass_const)
+    end
+    
+    def load_moneta_klass(klass)
+      klass_const = klass.respond_to?(:constantize) ? klass.constantize : klass      
       klass_const.new(@options)
     end
     

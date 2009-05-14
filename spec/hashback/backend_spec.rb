@@ -30,4 +30,21 @@ describe HashBack::Backend do
       end
     end
   end  
+  
+  describe "#require_moneta_library_for" do
+    it "should require the class given" do
+      @b.expects(:require_klass).with('moneta/memory')
+      @b.__send__(:require_moneta_library_for, "Moneta::Memory")
+    end
+  end
+  
+  describe "#load_moneta_klass" do
+    it "should load the klass without error" do
+      require 'moneta/memory'
+      
+      lambda {
+        @b.__send__(:load_moneta_klass, "Moneta::Memory")      
+      }.should_not raise_error
+    end
+  end
 end

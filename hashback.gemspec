@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb"
   ]
   s.add_dependency("wycats-moneta", ["> 0.0.0"])
+  s.add_dependency("activesupport", ["> 0.0.0"])
 end
