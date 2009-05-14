@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = "hashback"
-  s.version  = "0.0.1"
+  s.version  = "0.0.1.1"
   s.date     = "2009-05-13"
   s.summary  = "Generic tool for writing namespaced key-value data to a variety of hash-type systems"
   s.email    = "justin@phq.org"
