@@ -1,0 +1,8 @@
+= HashBack
+
+Provides a general interface over Moneta which allows namespacing of key values and the requirement of correct
+Moneta backend class.
+
+== Author
+
+Justin S. Leitgeb, <justin@phq.org>
