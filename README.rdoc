@@ -1,7 +1,8 @@
 = HashBack
 
-HashBack is a simple Object-hash mapping (OHM) system for Ruby.  It allows for serializable classes to be saved, retrieved and  
-deleted from any key-value store supported by Moneta (a unified interface to key-value stores).
+HashBack is a simple Object-hash mapping (OHM) system for Ruby.  It allows for serializable classes to be saved, 
+retrieved and deleted from any key-value store supported by {Moneta}[http://github.com/wycats/moneta/tree/master] 
+(a unified interface to key-value stores).
 
 == Quick Start
 
@@ -48,7 +49,7 @@ Note that at this point the data is still available in the instance variables fo
 == Detailed usage
 
 Generally, HashBack should work with any class that can be serialized.  You can decide which key-value storage system
-to use by passing an appropriate class name to HashBack::Resource.setup.  See the Moneta documentation available backends.
+to use by passing an appropriate class name to HashBack::Resource.setup.  See the Moneta documentation for available backends.
 
 You can also pass options to HashBack::Resource which are given directly to the moneta backend during initialization as 
 follows:
@@ -76,9 +77,9 @@ together a lightweight implementation with methods for saving and accessing simi
 The following features are not present in the current library, but may be useful:
 
 * A system of callbacks
-* A system for associating objects, perhaps constrained to objects that have a 1 - 1 mapping (since it's) not 
+* A system for associating objects, perhaps constrained to objects that have a 1 - 1 mapping (since it's not entirely 
   intuitive what the structures or algorithms would be for mainting integrity with higher levels of mapping between
-  objects. 
+  objects). 
 
 == Feedback
 
