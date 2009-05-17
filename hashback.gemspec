@@ -27,9 +27,9 @@ Gem::Specification.new do |s|
   
   s.extra_rdoc_files = [ "README.rdoc" ]
   
-  spec.rdoc_options += [
+  s.rdoc_options += [
     '--title', 'HashBack',
-    '--main', 'README.rdoc'
+    '--main', 'README.rdoc',
     '--line-numbers',
     '--inline-source'
    ]
