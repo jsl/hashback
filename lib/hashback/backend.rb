@@ -12,7 +12,7 @@ module HashBack
     end
     
     def [](key)
-      @moneta.keys.include?(key_name_for(key)) ? @moneta[key_name_for(key)] : nil
+      @moneta[key_name_for(key)]
     end
     
     def []=(key, value)
@@ -36,7 +36,13 @@ module HashBack
 
     def load_moneta_klass(klass)
       klass_const = klass.respond_to?(:constantize) ? klass.constantize : klass      
-      klass_const.new(@options)
+      moneta = klass_const.new(@options)
+      
+      # The options hash would have messed up default Hash initialization to return an empty hash
+      # when the key was not found.  Revert this case by setting the default to nil if the object 
+      # responds to this method.
+      moneta.default = nil if moneta.respond_to?(:default)
+      moneta
     end
     
     def require_klass(klass)
