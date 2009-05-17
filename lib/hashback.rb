@@ -1,4 +1,6 @@
 require 'moneta'
 require 'activesupport'
 
-require File.expand_path(File.join(File.dirname(__FILE__), %w[hashback backend] ))
+Dir[File.join(File.dirname(__FILE__), 'hashback', '*.rb')].each do |f|
+  require File.expand_path(f)
+end

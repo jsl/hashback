@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = "hashback"
-  s.version  = "0.0.1.2"
+  s.version  = "0.0.2"
   s.date     = "2009-05-13"
   s.summary  = "Generic tool for writing namespaced key-value data to a variety of hash-type systems"
   s.email    = "justin@phq.org"
@@ -16,13 +16,15 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "lib/hashback.rb",
-    "lib/hashback/backend.rb"
+    "lib/hashback/backend.rb",
+    "lib/hashback/resource.rb"
   ]
   s.test_files = [
     "spec/hashback/backend_spec.rb",
     "spec/hashback_spec.rb",
     "spec/spec_helper.rb"
   ]
-  s.add_dependency("wycats-moneta", ["> 0.0.0"])
-  s.add_dependency("activesupport", ["> 0.0.0"])
+  s.add_dependency("wycats-moneta")
+  s.add_dependency("activesupport")
+  s.add_dependency("assaf-uuid")
 end

@@ -8,11 +8,11 @@ module HashBack
     def initialize(namespace, moneta_klass, options = { })
       @namespace = namespace
       @options   = options
-      @moneta     = initialize_moneta_klass(moneta_klass)
+      @moneta    = initialize_moneta_klass(moneta_klass)
     end
     
     def [](key)
-      @moneta[key_name_for(key)]
+      @moneta.keys.include?(key_name_for(key)) ? @moneta[key_name_for(key)] : nil
     end
     
     def []=(key, value)

@@ -3,6 +3,7 @@ require File.join(File.dirname(__FILE__), %w[ .. spec_helper ])
 describe HashBack::Backend do
   before do
     @mock_moneta = mock('moneta')
+    @mock_moneta.stubs(:keys).returns(['keyname'])
     @moneta_klass = "Moneta::Memory"
     @b = HashBack::Backend.new('foo', @moneta_klass, { })
     @b.instance_variable_set(:@moneta, @mock_moneta)

@@ -1,7 +1,88 @@
 = HashBack
 
-Provides a general interface over Moneta which allows namespacing of key values and the requirement of correct
-Moneta backend class.
+HashBack is a simple Object-hash mapping (OHM) system for Ruby.  It allows for serializable classes to be saved, retrieved and  
+deleted from any key-value store supported by Moneta (a unified interface to key-value stores).
+
+== Quick Start
+
+HashBack is easy to use, so we can jump right in to code using the system.
+
+First, install the gem:
+
+  sudo gem install hashback
+  
+Then, in your code you'll want to require 'hashback'.  For this example, the object ids that we use will be 
+UUIDs created by the assaf-uuid gem, so we'll include that as well.
+
+  require 'hashback'
+  require 'uuid'
+
+Below we create a simple class that is serializable to HashBack.
+
+  class Elephant
+    HashBack::Resource.setup(self, :uuid, 'Moneta::Memory')
+
+    attr_accessor :uuid, :name
+
+    def initialize(name)
+      @name = name
+      @uuid = UUID.new.generate
+    end
+  end
+
+You can now start using this class to save, fetch and retrieve elephants as follows:
+
+  dumbo = Elephant.new('Dumbo')
+  dumbo.save
+
+To bring Dumbo back as a new elephant:
+
+  new_dumbo = Elephant.fetch(dumbo.uuid)
+
+When you're sick of Dumbo and want to get rid of him:
+
+  new_dumbo.destroy
+
+Note that at this point the data is still available in the instance variables for Dumbo, but the persisted form of him is gone.
+
+== Detailed usage
+
+Generally, HashBack should work with any class that can be serialized.  You can decide which key-value storage system
+to use by passing an appropriate class name to HashBack::Resource.setup.  See the Moneta documentation available backends.
+
+You can also pass options to HashBack::Resource which are given directly to the moneta backend during initialization as 
+follows:
+
+  require 'hashback'
+  
+  class Foo
+    HashBack::Resource.setup(self, :id, 'Moneta::Memcache', :server => 'localhost:1978')
+  end
+  
+This initializes a class with a backend storage in a Tokyo Tyrant server.  The serialized forms of objects that are 
+stored will be saved with keys like Foo-object_id.  You probably want to use a different id method to customize the id
+that will be used to store these objects.
+
+== Discussion
+
+Key-value databases are rapidly becoming more popular, and they clearly have several use cases that aren't well 
+addressed by existing RDBM systems.  While adoptation of these key-value storage systems has been rapid, there don't 
+seem to be any systems that help to implement common patterns for accessing objects saved in these stores.  Before 
+writing this program, I couldn't find any precedent for a concept of a OHM (Object Hash Mapping) system, so I put 
+together a lightweight implementation with methods for saving and accessing similar to popular ORM systems in Ruby.
+
+== TODO
+
+The following features are not present in the current library, but may be useful:
+
+* A system of callbacks
+* A system for associating objects, perhaps constrained to objects that have a 1 - 1 mapping (since it's) not 
+  intuitive what the structures or algorithms would be for mainting integrity with higher levels of mapping between
+  objects. 
+
+== Feedback
+
+Please write the author if you have any questions or feedbacks about this library.
 
 == Author
 
