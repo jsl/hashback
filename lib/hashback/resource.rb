@@ -1,6 +1,6 @@
 module HashBack
   
-  # +HashBack::Resource+ is an Object-Hash Mapping (OHM) tool for Ruby.  It is able to map Ruby objects
+  # HashBack::Resource is an Object-Hash Mapping (OHM) tool for Ruby.  It is able to map Ruby objects
   # to any of the backends supported by Moneta, a unified interface to key-value storage systems.
   class Resource
     
