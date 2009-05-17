@@ -6,11 +6,11 @@ module HashBack
     
     # Configures the persistent backend for this object.  Configuration options:
     #
-    # * source - the class to be persisted
-    # * key_method - a symbol representing the method that will return a unique identifier 
+    # * +source+ - the class to be persisted
+    # * +key_method+ - a symbol representing the method that will return a unique identifier 
     #   for this object when called on the instance
-    # * moneta_klass - a String representation or class constant of the Moneta class used to store this object
-    # * moneta_options - an (optional) hash which is passed directly to the moneta backend for configuration
+    # * +moneta_klass+ - a String representation or class constant of the Moneta class used to store this object
+    # * +moneta_options+ - an (optional) hash which is passed directly to the moneta backend for configuration
     def self.setup(source, key_method_sym, moneta_klass, moneta_options = {})
       source.__send__(:class_variable_set, :@@_backend, HashBack::Backend.new(source.to_s, moneta_klass, moneta_options))
       source.__send__(:class_variable_set, :@@_key_method_sym, key_method_sym)

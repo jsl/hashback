@@ -2,7 +2,7 @@
 
 HashBack is a simple Object-hash mapping (OHM) system for Ruby.  It allows for serializable classes to be saved, 
 retrieved and deleted from any key-value store supported by {Moneta}[http://github.com/wycats/moneta/tree/master] 
-(a unified interface to key-value stores).
+(a unified interface to key-value systems).
 
 == Quick Start
 
