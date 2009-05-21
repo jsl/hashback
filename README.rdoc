@@ -10,7 +10,7 @@ HashBack is easy to use, so we can jump right in to code using the system.
 
 First, install the gem:
 
-  sudo gem install hashback
+  sudo gem install jsl-hashback
   
 Then, in your code you'll want to require 'hashback'.  For this example, the object ids that we use will be 
 UUIDs created by the assaf-uuid gem, so we'll include that as well.
