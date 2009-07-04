@@ -1,4 +1,3 @@
-require 'moneta'
 require 'activesupport'
 
 Dir[File.join(File.dirname(__FILE__), 'hashback', '*.rb')].each do |f|

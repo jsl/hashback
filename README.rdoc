@@ -1,8 +1,8 @@
 = HashBack
 
 HashBack is a simple Object-hash mapping (OHM) system for Ruby.  It allows for serializable classes to be saved, 
-retrieved and deleted from any key-value store supported by {Moneta}[http://github.com/wycats/moneta/tree/master] 
-(a unified interface to key-value systems).
+retrieved and deleted from any key-value store.  It works particulary well with, but has no dependency on 
+{Moneta}[http://github.com/wycats/moneta/tree/master] (a unified interface to key-value systems).
 
 == Quick Start
 
@@ -21,7 +21,7 @@ UUIDs created by the assaf-uuid gem, so we'll include that as well.
 Below we create a simple class that is serializable to HashBack.
 
   class Elephant
-    HashBack::Resource.setup(self, :uuid, 'Moneta::Memory')
+    HashBack::Resource.setup(self, :uuid, Moneta::Memory.new)
 
     attr_accessor :uuid, :name
 
@@ -46,6 +46,12 @@ When you're sick of Dumbo and want to get rid of him:
 
 Note that at this point the data is still available in the instance variables for Dumbo, but the persisted form of him is gone.
 
+== HashBack::Backend
+
+A lightweight class called HashBack::Backend is included with the distribution of this gem.  This class wraps common Hash-like
+getter and setter methods with ones that include a namespace.  This may be helpful to you if you're persisting many objects
+to the same backend data store.  Please see the documentation for HashBack::Backend for more information.
+
 == Detailed usage
 
 Generally, HashBack should work with any class that can be serialized.  You can decide which key-value storage system
@@ -57,7 +63,7 @@ follows:
   require 'hashback'
   
   class Foo
-    HashBack::Resource.setup(self, :id, 'Moneta::Memcache', :server => 'localhost:1978')
+    HashBack::Resource.setup(self, :id, HashBack::Backend.new('Foo', Moneta::Memcache.new(:server => 'localhost:1978')))
   end
   
 This initializes a class with a backend storage in a Tokyo Tyrant server.  The serialized forms of objects that are 
@@ -77,13 +83,11 @@ together a lightweight implementation with methods for saving and accessing simi
 The following features are not present in the current library, but may be useful:
 
 * A system of callbacks
-* A system for associating objects, perhaps constrained to objects that have a 1 - 1 mapping (since it's not entirely 
-  intuitive what the structures or algorithms would be for mainting integrity with higher levels of mapping between
-  objects). 
+* A system for associating objects, perhaps constrained to objects that have a 1 - 1 mapping
 
 == Feedback
 
-Please write the author if you have any questions or feedbacks about this library.
+Please write the author if you have any questions or feedback regarding this library.
 
 == Author
 

@@ -1,11 +1,20 @@
 Gem::Specification.new do |s|
   s.name     = "hashback"
-  s.version  = "0.0.2.5"
+  s.version  = "0.0.3"
   s.date     = "2009-05-13"
-  s.summary  = "Generic tool for writing namespaced key-value data to a variety of hash-type systems"
+  
+  s.summary  = "Ruby Object-Hash Mapping system (OHM)"
+  
+  s.description = <<-EOF
+    HashBack makes your ruby class persistent by adding methods which will save and retrieve it from a 
+    backend key-value store.  Useful when you have objects that should respond to #save and #fetch (as
+    a class method).  Works well with the Moneta gem, which automatically serializes objects before they
+    are saved and after they are retrieved, but functions with any key-value storage system.
+  EOF
+    
   s.email    = "justin@phq.org"
   s.homepage = "http://github.com/jsl/hashback"
-  s.description = "Wrapper around Moneta that facilitates using the key-value store as a backend for applications requiring namespacing"
+  s.description = "HashBack"
   s.has_rdoc = true
   s.authors  = ["Justin Leitgeb"]
   s.files    = [
@@ -32,9 +41,5 @@ Gem::Specification.new do |s|
     '--main', 'README.rdoc',
     '--line-numbers',
     '--inline-source'
-   ]
-   
-  s.add_dependency("jsl-moneta")
-  s.add_dependency("activesupport")
-  s.add_dependency("assaf-uuid")
+   ]   
 end

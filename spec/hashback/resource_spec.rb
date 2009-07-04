@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), %w[ .. spec_helper ])
 require 'uuid'
 
 class Orange
-  HashBack::Resource.setup(self, :uuid, 'Moneta::Memory', {  })
+  HashBack::Resource.setup(self, :uuid, {  })
 
   attr_accessor :uuid
   
